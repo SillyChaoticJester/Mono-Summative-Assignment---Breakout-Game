@@ -4,6 +4,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Mono_Summative_Assignment___Breakout_Game
 {
+    enum Screen
+    {
+        Intro,
+        Game,
+        GoodEnd,
+        BadEnd
+    }
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
