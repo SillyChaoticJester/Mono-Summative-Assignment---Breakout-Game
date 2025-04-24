@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace Mono_Summative_Assignment___Breakout_Game
 {
-    public class Brick
+    public class Ball
     {
         private Rectangle _location;
-        private List<Texture2D> _texture;
+        private Texture2D _texture;
+        private Vector2 _speed;
 
-        public Brick(List<Texture2D> texture, Rectangle location)
+        public Ball(Texture2D textures, Rectangle location)
         {
-            _texture = texture;
+            _texture = textures;
             _location = location;
+            _speed = Vector2.Zero;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture[0], _location, Color.White);
+            spriteBatch.Draw(_texture, _location, Color.White);
         }
     }
 }

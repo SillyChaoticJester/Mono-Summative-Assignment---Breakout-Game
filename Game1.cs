@@ -19,14 +19,16 @@ namespace Mono_Summative_Assignment___Breakout_Game
         private SpriteBatch _spriteBatch;
 
         Texture2D paddleTexture;
-        Texture2D brickTexture;
         Texture2D ballTexture;
 
         Rectangle ballRect;
         Rectangle brickRect;
         Rectangle paddleRect;
 
-        List<Brick> bricks;
+        Brick bricks;
+
+        //List<Brick> bricks;
+        List<Texture2D> brickTextures;
 
         //Things to do:
         //Make a Brick Class, give it properties to have a different position, size, color etc.
@@ -46,6 +48,8 @@ namespace Mono_Summative_Assignment___Breakout_Game
             // TODO: Add your initialization logic here
 
             paddleRect = new Rectangle(0, 0, 25, 25);
+            brickTextures = new List<Texture2D>();
+            bricks = new Brick(brickTextures, new Rectangle(25, 25, 40, 25));
 
             base.Initialize();
         }
@@ -56,8 +60,8 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: use this.Content to load your game content here
             paddleTexture = Content.Load<Texture2D>("Images/paddle");
-            brickTexture = Content.Load<Texture2D>("Images/rectangle (1)");
-            ballTexture = Content.Load<Texture2D>("Images/circle (1)");
+            ballTexture = Content.Load<Texture2D>("Images/circle");
+            brickTextures.Add(Content.Load<Texture2D>("Images/rectangle"));
         }
 
         protected override void Update(GameTime gameTime)
@@ -76,7 +80,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-
+            bricks.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

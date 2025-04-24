@@ -11,6 +11,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Content\Images\circle %281%29.png" />
+    <None Remove="Content\Images\rectangle %281%29.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

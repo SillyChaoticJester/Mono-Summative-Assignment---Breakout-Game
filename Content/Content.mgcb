@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Images/circle (1).png
+#begin Images/circle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,7 +23,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/circle (1).png
+/build:Images/circle.png
 
 #begin Images/paddle.png
 /importer:TextureImporter
@@ -37,7 +37,7 @@
 /processorParam:TextureFormat=Color
 /build:Images/paddle.png
 
-#begin Images/rectangle (1).png
+#begin Images/rectangle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,5 +47,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/rectangle (1).png
+/build:Images/rectangle.png
 
