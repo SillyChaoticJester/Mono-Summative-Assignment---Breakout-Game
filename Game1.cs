@@ -26,9 +26,12 @@ namespace Mono_Summative_Assignment___Breakout_Game
         Rectangle paddleRect;
 
         Brick bricks;
+        Paddle paddle;
 
         //List<Brick> bricks;
         List<Texture2D> brickTextures;
+
+        KeyboardState keyboardState;
 
         //Things to do:
         //Make a Brick Class, give it properties to have a different position, size, color etc.
@@ -49,9 +52,11 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             paddleRect = new Rectangle(0, 0, 25, 25);
             brickTextures = new List<Texture2D>();
-            bricks = new Brick(brickTextures, new Rectangle(25, 25, 40, 25));
 
             base.Initialize();
+
+            bricks = new Brick(brickTextures, new Rectangle(25, 25, 40, 25));
+            paddle = new Paddle(paddleTexture, new Rectangle(200, 100, 100, 20));
         }
 
         protected override void LoadContent()
@@ -70,6 +75,8 @@ namespace Mono_Summative_Assignment___Breakout_Game
                 Exit();
 
             // TODO: Add your update logic here
+            keyboardState = Keyboard.GetState();
+            paddle.Update(keyboardState);
 
             base.Update(gameTime);
         }
@@ -81,6 +88,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
             bricks.Draw(_spriteBatch);
+            paddle.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
