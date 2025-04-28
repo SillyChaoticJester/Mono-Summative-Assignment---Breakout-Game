@@ -25,5 +25,10 @@ namespace Mono_Summative_Assignment___Breakout_Game
         {
             spriteBatch.Draw(_texture, _location, Color.White);
         }
+
+        public void Update()
+        {
+
+        }
     }
 }

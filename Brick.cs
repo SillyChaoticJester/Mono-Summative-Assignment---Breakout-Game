@@ -12,6 +12,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
     {
         private Rectangle _location;
         private List<Texture2D> _texture;
+        private Color _color;
 
         public Brick(List<Texture2D> texture, Rectangle location)
         {

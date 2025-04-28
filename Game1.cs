@@ -24,11 +24,13 @@ namespace Mono_Summative_Assignment___Breakout_Game
         Rectangle ballRect;
         Rectangle brickRect;
         Rectangle paddleRect;
+        Rectangle window;
 
         Brick bricks;
         Paddle paddle;
+        Ball ball;
 
-        //List<Brick> bricks;
+        List<Brick> brickPlacer;
         List<Texture2D> brickTextures;
 
         KeyboardState keyboardState;
@@ -51,12 +53,22 @@ namespace Mono_Summative_Assignment___Breakout_Game
             // TODO: Add your initialization logic here
 
             paddleRect = new Rectangle(0, 0, 25, 25);
+            brickPlacer = new List<Brick>();
+            window = new Rectangle(0, 0, 800, 500);
+            _graphics.PreferredBackBufferWidth = window.Width;
+            _graphics.PreferredBackBufferHeight = window.Height;
+            _graphics.ApplyChanges();
+
             brickTextures = new List<Texture2D>();
 
             base.Initialize();
 
-            bricks = new Brick(brickTextures, new Rectangle(25, 25, 40, 25));
-            paddle = new Paddle(paddleTexture, new Rectangle(200, 100, 100, 20));
+            bricks = new Brick(brickTextures, new Rectangle(0, 0, 40, 25));
+            for (int x = 0; x < window.Width; x += 40)
+                for (int y = 0; y < (window.Height - 250); y += 25)
+                    brickPlacer.Add(new Brick(brickTextures, new Rectangle(x, y, 40, 25)));
+            paddle = new Paddle(paddleTexture, new Rectangle(350, 450, 100, 20));
+            ball = new Ball(ballTexture, new Rectangle(300, 200, 25, 25));
         }
 
         protected override void LoadContent()
@@ -87,8 +99,11 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            bricks.Draw(_spriteBatch);
+            //bricks.Draw(_spriteBatch);
+            foreach (Brick brick in brickPlacer)
+                brick.Draw(_spriteBatch);
             paddle.Draw(_spriteBatch);
+            ball.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
