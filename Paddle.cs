@@ -28,12 +28,12 @@ namespace Mono_Summative_Assignment___Breakout_Game
             _speed = Vector2.Zero;
             if (keyboardState.IsKeyDown(Keys.A))
             {
-                _speed.X += -2;
+                _speed.X += -3;
             }
             
             if (keyboardState.IsKeyDown(Keys.D))
             {
-                _speed.X += 2;
+                _speed.X += 3;
             }
             
             _rect.Offset(_speed);

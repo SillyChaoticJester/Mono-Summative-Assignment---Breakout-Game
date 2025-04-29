@@ -26,7 +26,6 @@ namespace Mono_Summative_Assignment___Breakout_Game
         Rectangle paddleRect;
         Rectangle window;
 
-        Brick bricks;
         Paddle paddle;
         Ball ball;
 
@@ -63,12 +62,11 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             base.Initialize();
 
-            bricks = new Brick(brickTextures, new Rectangle(0, 0, 40, 25));
             for (int x = 0; x < window.Width; x += 40)
                 for (int y = 0; y < (window.Height - 250); y += 25)
-                    brickPlacer.Add(new Brick(brickTextures, new Rectangle(x, y, 40, 25)));
+                    brickPlacer.Add(new Brick(brickTextures, new Rectangle(x, y, 39, 24), Color.PaleTurquoise));
             paddle = new Paddle(paddleTexture, new Rectangle(350, 450, 100, 20));
-            ball = new Ball(ballTexture, new Rectangle(300, 200, 25, 25));
+            ball = new Ball(ballTexture, new Rectangle(385, 375, 25, 25));
         }
 
         protected override void LoadContent()
@@ -89,13 +87,14 @@ namespace Mono_Summative_Assignment___Breakout_Game
             // TODO: Add your update logic here
             keyboardState = Keyboard.GetState();
             paddle.Update(keyboardState);
+            ball.Update(_graphics);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();

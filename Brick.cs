@@ -14,15 +14,16 @@ namespace Mono_Summative_Assignment___Breakout_Game
         private List<Texture2D> _texture;
         private Color _color;
 
-        public Brick(List<Texture2D> texture, Rectangle location)
+        public Brick(List<Texture2D> texture, Rectangle location, Color color)
         {
             _texture = texture;
             _location = location;
+            _color = color;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture[0], _location, Color.White);
+            spriteBatch.Draw(_texture[0], _location, _color);
         }
     }
 }

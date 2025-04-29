@@ -18,7 +18,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
         {
             _texture = textures;
             _location = location;
-            _speed = Vector2.Zero;
+            _speed = new Vector2(1, 1);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -26,9 +26,24 @@ namespace Mono_Summative_Assignment___Breakout_Game
             spriteBatch.Draw(_texture, _location, Color.White);
         }
 
-        public void Update()
+        public void Update(GraphicsDeviceManager graphics)
         {
+            if (_location.Right > graphics.PreferredBackBufferWidth || _location.Left < 0)
+            {
+                _speed.X *= -1;
+            }
+           
+            if (_location.Bottom > graphics.PreferredBackBufferHeight || _location.Top < 0)
+            {
+                _speed.Y *= -1;
+            }
+            
+            _location.Offset(_speed);
+        }
 
+        public Rectangle Rect
+        {
+            get { return _location; }
         }
     }
 }
