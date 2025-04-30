@@ -87,7 +87,16 @@ namespace Mono_Summative_Assignment___Breakout_Game
             // TODO: Add your update logic here
             keyboardState = Keyboard.GetState();
             paddle.Update(keyboardState);
-            ball.Update(_graphics);
+            ball.Update(_graphics, paddle.Rect);
+            for (int i = 0; i < brickPlacer.Count; i++)
+            {
+                if (brickPlacer[i].Intersects(ball.Rect))
+                {
+                    //brickTextures.RemoveAt(i);
+                    brickPlacer.RemoveAt(i);
+                    i--;
+                }
+            }
 
             base.Update(gameTime);
         }

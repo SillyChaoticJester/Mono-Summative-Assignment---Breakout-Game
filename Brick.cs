@@ -25,5 +25,22 @@ namespace Mono_Summative_Assignment___Breakout_Game
         {
             spriteBatch.Draw(_texture[0], _location, _color);
         }
+
+        public bool Contains(Rectangle ball)
+        {
+            return _location.Contains(ball);
+        }
+
+        public bool Intersects(Rectangle rect)
+        {
+            return _location.Intersects(rect);
+        }
+
+
+        public void Update(Rectangle ball)
+        {
+
+        }
+
     }
 }
