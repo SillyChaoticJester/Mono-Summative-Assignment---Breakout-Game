@@ -20,6 +20,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
         Texture2D paddleTexture;
         Texture2D ballTexture;
+        Texture2D galaxyBackground;
 
         Rectangle ballRect;
         Rectangle brickRect;
@@ -34,11 +35,9 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
         KeyboardState keyboardState;
 
-        //Things to do:
-        //Make a Brick Class, give it properties to have a different position, size, color etc.
-        //Make a Brick List afterwards, and make it to where they have to get placed next to each other
+        //Things to do
         //Make a Ball Class and give it all of its functions
-        //Make a Paddle Class and give it all of its functions
+
 
         public Game1()
         {
@@ -75,8 +74,9 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: use this.Content to load your game content here
             paddleTexture = Content.Load<Texture2D>("Images/paddle");
-            ballTexture = Content.Load<Texture2D>("Images/circle");
-            brickTextures.Add(Content.Load<Texture2D>("Images/rectangle"));
+            ballTexture = Content.Load<Texture2D>("Images/marble");
+            brickTextures.Add(Content.Load<Texture2D>("Images/crystal_brick"));
+            galaxyBackground = Content.Load<Texture2D>("Images/purple_galaxy");
         }
 
         protected override void Update(GameTime gameTime)
@@ -87,16 +87,8 @@ namespace Mono_Summative_Assignment___Breakout_Game
             // TODO: Add your update logic here
             keyboardState = Keyboard.GetState();
             paddle.Update(keyboardState);
-            ball.Update(_graphics, paddle.Rect);
-            for (int i = 0; i < brickPlacer.Count; i++)
-            {
-                if (brickPlacer[i].Intersects(ball.Rect))
-                {
-                    //brickTextures.RemoveAt(i);
-                    brickPlacer.RemoveAt(i);
-                    i--;
-                }
-            }
+            ball.Update(_graphics, paddle.Rect, brickPlacer);
+            
 
             base.Update(gameTime);
         }
@@ -107,7 +99,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            //bricks.Draw(_spriteBatch);
+            _spriteBatch.Draw(galaxyBackground, window, Color.White);
             foreach (Brick brick in brickPlacer)
                 brick.Draw(_spriteBatch);
             paddle.Draw(_spriteBatch);

@@ -26,13 +26,15 @@ namespace Mono_Summative_Assignment___Breakout_Game
             spriteBatch.Draw(_texture, _location, Color.White);
         }
 
-        public void Update(GraphicsDeviceManager graphics, Rectangle player)
+        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision)
         {
             if (_location.Right > graphics.PreferredBackBufferWidth || _location.Left < 0)
             {
                 _speed.X *= -1;
             }
-           
+            
+
+
             if (_location.Bottom > graphics.PreferredBackBufferHeight || _location.Top < 0)
             {
                 _speed.Y *= -1;
@@ -40,10 +42,35 @@ namespace Mono_Summative_Assignment___Breakout_Game
             
             if (_location.Intersects(player))
             {
-                _speed.Y += -1;
+                _speed.Y *= -1;
             }
 
-            _location.Offset(_speed);
+            
+            //if (_location.Intersects(collision))
+
+            _location.X += (int)_speed.X;
+
+            for (int i = 0; i < collision.Count; i++)
+            {
+                if (collision[i].Intersects(_location))
+                {
+                    collision.RemoveAt(i);
+                    i--;
+                    _speed.X *= -1;
+
+                }
+            }
+
+            _location.Y += (int)_speed.Y;
+            for (int i = 0; i < collision.Count; i++)
+            {
+                if (collision[i].Intersects(_location))
+                {
+                    collision.RemoveAt(i);
+                    i--;
+                    _speed.Y *= -1;
+                }
+            }
         }
 
         public Rectangle Rect
@@ -55,5 +82,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
         {
             return _location.Intersects(player);
         }
+
+        
     }
 }
