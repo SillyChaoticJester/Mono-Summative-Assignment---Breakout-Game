@@ -13,6 +13,25 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Fonts/TextFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TextFont.spritefont
+
+#begin Images/bad_end_background.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/bad_end_background.jpg
+
 #begin Images/circle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,6 +55,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/crystal_brick.png
+
+#begin Images/good_end_background.jpeg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/good_end_background.jpeg
+
+#begin Images/intro_background.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/intro_background.jpg
 
 #begin Images/marble.png
 /importer:TextureImporter
