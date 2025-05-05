@@ -26,18 +26,23 @@ namespace Mono_Summative_Assignment___Breakout_Game
             spriteBatch.Draw(_texture, _location, Color.White);
         }
 
-        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision)
+        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision, int count)
         {
             if (_location.Right > graphics.PreferredBackBufferWidth || _location.Left < 0)
             {
                 _speed.X *= -1;
             }
-            
 
-
-            if (_location.Bottom > graphics.PreferredBackBufferHeight || _location.Top < 0)
+            if (_location.Top < 0)
             {
                 _speed.Y *= -1;
+            }
+
+            if (_location.Y > graphics.PreferredBackBufferHeight)
+            {
+                _location.X = 385;
+                _location.Y = 375;
+                count -= 1;
             }
             
             if (_location.Intersects(player))

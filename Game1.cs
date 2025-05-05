@@ -38,12 +38,15 @@ namespace Mono_Summative_Assignment___Breakout_Game
         List<Texture2D> brickTextures;
 
         SpriteFont textFont;
+        SpriteFont messageFont;
 
         KeyboardState keyboardState;
         Screen screenState;
 
+        int ballCount = 3;
+
         //Things to do
-        //Make a Ball Class and give it all of its functions
+        //Make a Ball System
 
 
         public Game1()
@@ -57,7 +60,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
         {
             // TODO: Add your initialization logic here
 
-            screenState = Screen.Game;
+            screenState = Screen.BadEnd;
             paddleRect = new Rectangle(0, 0, 25, 25);
             brickPlacer = new List<Brick>();
             window = new Rectangle(0, 0, 800, 500);
@@ -86,6 +89,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             brickTextures.Add(Content.Load<Texture2D>("Images/crystal_brick"));
 
             textFont = Content.Load<SpriteFont>("Fonts/TextFont");
+            messageFont = Content.Load<SpriteFont>("Fonts/MessageFont");
 
             galaxyBackground = Content.Load<Texture2D>("Images/purple_galaxy");
             introBackground = Content.Load<Texture2D>("Images/intro_background");
@@ -100,9 +104,34 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: Add your update logic here
             keyboardState = Keyboard.GetState();
-            paddle.Update(keyboardState);
-            ball.Update(_graphics, paddle.Rect, brickPlacer);
             
+            if (screenState == Screen.Intro)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    screenState = Screen.Game;
+                }
+            }
+            else if (screenState == Screen.Game)
+            {
+                paddle.Update(keyboardState);
+                ball.Update(_graphics, paddle.Rect, brickPlacer, ballCount);
+                if (brickPlacer.Count == 0 && ballCount > 0)
+                {
+                    screenState = Screen.GoodEnd;
+                }
+                else if (ballCount == 0)
+                {
+                    screenState = Screen.BadEnd;
+                }
+            }
+            else if (screenState == Screen.GoodEnd)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    Exit();
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -116,7 +145,8 @@ namespace Mono_Summative_Assignment___Breakout_Game
             if (screenState == Screen.Intro)
             {
                 _spriteBatch.Draw(introBackground, window, Color.White);
-                _spriteBatch.DrawString(textFont, "Breakout", new Vector2(400, 10), Color.Black);
+                _spriteBatch.DrawString(textFont, "Breakout", new Vector2(250, 10), Color.Black);
+                _spriteBatch.DrawString(messageFont, "Press ENTER to start.", new Vector2(250, 400), Color.Black);
             }
             else if (screenState == Screen.Game)
             {
@@ -129,10 +159,15 @@ namespace Mono_Summative_Assignment___Breakout_Game
             else if (screenState == Screen.GoodEnd)
             {
                 _spriteBatch.Draw(goodBackground, window, Color.White);
+                _spriteBatch.DrawString(textFont, "Congratulations!", new Vector2(175, 10), Color.Black);
+                _spriteBatch.DrawString(messageFont, "You got rid of all the bricks without losing all of your marbles!", new Vector2(50, 300), Color.Black);
+                _spriteBatch.DrawString(messageFont, "Good Job!", new Vector2(350, 330), Color.Black);
             }
             else
             {
                 _spriteBatch.Draw(badBackground, window, Color.White);
+                _spriteBatch.DrawString(textFont, "Uh Oh! You Lost!", new Vector2(155, 10), Color.White);
+                _spriteBatch.DrawString(messageFont, "You lost all your marbles and now are trapped for your crimes!", new Vector2(30, 300), Color.White);
             }
             _spriteBatch.End();
 
