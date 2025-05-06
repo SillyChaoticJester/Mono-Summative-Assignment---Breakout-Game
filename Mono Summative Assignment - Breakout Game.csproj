@@ -11,6 +11,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\Sounds\**" />
+    <EmbeddedResource Remove="Content\Sounds\**" />
+    <None Remove="Content\Sounds\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Content\circle.png" />
     <None Remove="Content\Images\circle %281%29.png" />
     <None Remove="Content\Images\rectangle %281%29.png" />
     <None Remove="Icon.ico" />

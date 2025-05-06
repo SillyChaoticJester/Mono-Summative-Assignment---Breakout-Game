@@ -14,6 +14,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
         private Texture2D _texture;
         private Vector2 _speed;
 
+
         public Ball(Texture2D textures, Rectangle location)
         {
             _texture = textures;
@@ -42,7 +43,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             {
                 _location.X = 385;
                 _location.Y = 375;
-                count -= 1;
+                count--;
             }
             
             if (_location.Intersects(player))

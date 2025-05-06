@@ -135,3 +135,9 @@
 /processorParam:TextureFormat=Color
 /build:Images/rectangle.png
 
+#begin Sounds/thirsty.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/thirsty.wav
+

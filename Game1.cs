@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Mono_Summative_Assignment___Breakout_Game
@@ -27,8 +29,6 @@ namespace Mono_Summative_Assignment___Breakout_Game
         Texture2D badBackground;
 
         Rectangle ballRect;
-        Rectangle brickRect;
-        Rectangle paddleRect;
         Rectangle window;
 
         Paddle paddle;
@@ -45,6 +45,9 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
         int ballCount = 3;
 
+        SoundEffect musicEffect;
+        SoundEffectInstance musicEffectInstance;
+
         //Things to do
         //Make a Ball System
 
@@ -60,8 +63,8 @@ namespace Mono_Summative_Assignment___Breakout_Game
         {
             // TODO: Add your initialization logic here
 
-            screenState = Screen.BadEnd;
-            paddleRect = new Rectangle(0, 0, 25, 25);
+            screenState = Screen.Intro;
+            ballRect = new Rectangle(0, 465, 30, 30); 
             brickPlacer = new List<Brick>();
             window = new Rectangle(0, 0, 800, 500);
             _graphics.PreferredBackBufferWidth = window.Width;
@@ -95,6 +98,10 @@ namespace Mono_Summative_Assignment___Breakout_Game
             introBackground = Content.Load<Texture2D>("Images/intro_background");
             goodBackground = Content.Load<Texture2D>("Images/good_end_background");
             badBackground = Content.Load<Texture2D>("Images/bad_end_background");
+
+            musicEffect = Content.Load<SoundEffect>("Sounds/thristy");
+            musicEffectInstance = musicEffect.CreateInstance();
+            musicEffectInstance.IsLooped = true;
         }
 
         protected override void Update(GameTime gameTime)
@@ -116,13 +123,16 @@ namespace Mono_Summative_Assignment___Breakout_Game
             {
                 paddle.Update(keyboardState);
                 ball.Update(_graphics, paddle.Rect, brickPlacer, ballCount);
+                musicEffectInstance.Play();
                 if (brickPlacer.Count == 0 && ballCount > 0)
                 {
                     screenState = Screen.GoodEnd;
+                    musicEffectInstance.Stop();
                 }
                 else if (ballCount == 0)
                 {
                     screenState = Screen.BadEnd;
+                    musicEffectInstance.Stop();
                 }
             }
             else if (screenState == Screen.GoodEnd)
@@ -155,6 +165,9 @@ namespace Mono_Summative_Assignment___Breakout_Game
                     brick.Draw(_spriteBatch);
                 paddle.Draw(_spriteBatch);
                 ball.Draw(_spriteBatch);
+                _spriteBatch.Draw(ballTexture, ballRect, Color.White);
+                _spriteBatch.DrawString(messageFont, "x " + Convert.ToString(ballCount), new Vector2(30, 465), Color.White);
+
             }
             else if (screenState == Screen.GoodEnd)
             {
