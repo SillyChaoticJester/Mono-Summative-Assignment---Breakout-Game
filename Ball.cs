@@ -13,13 +13,14 @@ namespace Mono_Summative_Assignment___Breakout_Game
         private Rectangle _location;
         private Texture2D _texture;
         private Vector2 _speed;
-
+        private int _lives;
 
         public Ball(Texture2D textures, Rectangle location)
         {
             _texture = textures;
             _location = location;
             _speed = new Vector2(2, 2);
+            _lives = 3;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -27,7 +28,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             spriteBatch.Draw(_texture, _location, Color.White);
         }
 
-        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision, int count)
+        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision)
         {
             if (_location.Right > graphics.PreferredBackBufferWidth || _location.Left < 0)
             {
@@ -43,7 +44,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             {
                 _location.X = 385;
                 _location.Y = 375;
-                count--;
+                _lives--;
             }
             
             if (_location.Intersects(player))
@@ -82,6 +83,11 @@ namespace Mono_Summative_Assignment___Breakout_Game
         public Rectangle Rect
         {
             get { return _location; }
+        }
+
+        public int Lives
+        {
+            get { return _lives; }
         }
 
         public bool Intersects(Rectangle player)

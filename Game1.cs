@@ -43,8 +43,6 @@ namespace Mono_Summative_Assignment___Breakout_Game
         KeyboardState keyboardState;
         Screen screenState;
 
-        int ballCount = 3;
-
         SoundEffect musicEffect;
         SoundEffectInstance musicEffectInstance;
 
@@ -99,7 +97,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             goodBackground = Content.Load<Texture2D>("Images/good_end_background");
             badBackground = Content.Load<Texture2D>("Images/bad_end_background");
 
-            musicEffect = Content.Load<SoundEffect>("Sounds/thristy");
+            musicEffect = Content.Load<SoundEffect>("Sounds-Music/please_work");
             musicEffectInstance = musicEffect.CreateInstance();
             musicEffectInstance.IsLooped = true;
         }
@@ -122,14 +120,14 @@ namespace Mono_Summative_Assignment___Breakout_Game
             else if (screenState == Screen.Game)
             {
                 paddle.Update(keyboardState);
-                ball.Update(_graphics, paddle.Rect, brickPlacer, ballCount);
+                ball.Update(_graphics, paddle.Rect, brickPlacer);
                 musicEffectInstance.Play();
-                if (brickPlacer.Count == 0 && ballCount > 0)
+                if (brickPlacer.Count == 0 && ball.Lives > 0)
                 {
                     screenState = Screen.GoodEnd;
                     musicEffectInstance.Stop();
                 }
-                else if (ballCount == 0)
+                else if (ball.Lives == 0)
                 {
                     screenState = Screen.BadEnd;
                     musicEffectInstance.Stop();
@@ -166,7 +164,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
                 paddle.Draw(_spriteBatch);
                 ball.Draw(_spriteBatch);
                 _spriteBatch.Draw(ballTexture, ballRect, Color.White);
-                _spriteBatch.DrawString(messageFont, "x " + Convert.ToString(ballCount), new Vector2(30, 465), Color.White);
+                _spriteBatch.DrawString(messageFont, "x " + Convert.ToString(ball.Lives), new Vector2(30, 465), Color.White);
 
             }
             else if (screenState == Screen.GoodEnd)
