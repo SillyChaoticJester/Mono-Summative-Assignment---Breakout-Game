@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Mono_Summative_Assignment___Breakout_Game
 {
@@ -28,7 +29,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
             spriteBatch.Draw(_texture, _location, Color.White);
         }
 
-        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision)
+        public void Update(GraphicsDeviceManager graphics, Rectangle player, List<Brick> collision, SoundEffectInstance ouch)
         {
             if (_location.Right > graphics.PreferredBackBufferWidth || _location.Left < 0)
             {
@@ -42,6 +43,7 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             if (_location.Y > graphics.PreferredBackBufferHeight)
             {
+                ouch.Play();
                 _location.X = 385;
                 _location.Y = 375;
                 _lives--;

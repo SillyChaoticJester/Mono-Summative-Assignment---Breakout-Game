@@ -135,9 +135,33 @@
 /processorParam:TextureFormat=Color
 /build:Images/rectangle.png
 
+#begin Sounds-Music/jaunt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds-Music/jaunt.wav
+
+#begin Sounds-Music/notsohappymusic.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds-Music/notsohappymusic.ogg
+
+#begin Sounds-Music/ouch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds-Music/ouch.wav
+
 #begin Sounds-Music/please_work.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds-Music/please_work.wav
+
+#begin Sounds-Music/station.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds-Music/station.wav
 

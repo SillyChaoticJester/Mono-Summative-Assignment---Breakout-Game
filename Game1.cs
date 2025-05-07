@@ -44,7 +44,16 @@ namespace Mono_Summative_Assignment___Breakout_Game
         Screen screenState;
 
         SoundEffect musicEffect;
+        SoundEffect introEffect;
+        SoundEffect goodEffect;
+        SoundEffect badEffect;
         SoundEffectInstance musicEffectInstance;
+        SoundEffectInstance introEffectInstance;
+        SoundEffectInstance goodEffectInstance;
+        SoundEffectInstance badEffectInstance;
+
+        SoundEffect ouchEffect;
+        SoundEffectInstance ouchEffectInstance;
 
         //Things to do
         //Make a Ball System
@@ -100,6 +109,22 @@ namespace Mono_Summative_Assignment___Breakout_Game
             musicEffect = Content.Load<SoundEffect>("Sounds-Music/please_work");
             musicEffectInstance = musicEffect.CreateInstance();
             musicEffectInstance.IsLooped = true;
+
+            introEffect = Content.Load<SoundEffect>("Sounds-Music/station");
+            introEffectInstance = introEffect.CreateInstance();
+            introEffectInstance.IsLooped = true;
+
+            goodEffect = Content.Load<SoundEffect>("Sounds-Music/jaunt");
+            goodEffectInstance = goodEffect.CreateInstance();
+            goodEffectInstance.IsLooped = true;
+
+            badEffect = Content.Load<SoundEffect>("Sounds-Music/notsohappymusic");
+            badEffectInstance = badEffect.CreateInstance();
+            badEffectInstance.IsLooped = true;
+
+            ouchEffect = Content.Load<SoundEffect>("Sounds-Music/ouch");
+            ouchEffectInstance = ouchEffect.CreateInstance();
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -109,18 +134,20 @@ namespace Mono_Summative_Assignment___Breakout_Game
 
             // TODO: Add your update logic here
             keyboardState = Keyboard.GetState();
-            
+
             if (screenState == Screen.Intro)
             {
+                introEffectInstance.Play();
                 if (keyboardState.IsKeyDown(Keys.Enter))
                 {
+                    introEffectInstance.Stop();
                     screenState = Screen.Game;
                 }
             }
             else if (screenState == Screen.Game)
             {
                 paddle.Update(keyboardState);
-                ball.Update(_graphics, paddle.Rect, brickPlacer);
+                ball.Update(_graphics, paddle.Rect, brickPlacer, ouchEffectInstance);
                 musicEffectInstance.Play();
                 if (brickPlacer.Count == 0 && ball.Lives > 0)
                 {
@@ -135,8 +162,19 @@ namespace Mono_Summative_Assignment___Breakout_Game
             }
             else if (screenState == Screen.GoodEnd)
             {
+                goodEffectInstance.Play();
                 if (keyboardState.IsKeyDown(Keys.Enter))
                 {
+                    goodEffectInstance.Stop();
+                    Exit();
+                }
+            }
+            else
+            {
+                badEffectInstance.Play();
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    badEffectInstance.Stop();
                     Exit();
                 }
             }
@@ -153,8 +191,10 @@ namespace Mono_Summative_Assignment___Breakout_Game
             if (screenState == Screen.Intro)
             {
                 _spriteBatch.Draw(introBackground, window, Color.White);
-                _spriteBatch.DrawString(textFont, "Breakout", new Vector2(250, 10), Color.Black);
-                _spriteBatch.DrawString(messageFont, "Press ENTER to start.", new Vector2(250, 400), Color.Black);
+                _spriteBatch.DrawString(textFont, "Breakout", new Vector2(275, 10), Color.Black);
+                _spriteBatch.DrawString(messageFont, "Press ENTER to start.", new Vector2(275, 250), Color.Black);
+                _spriteBatch.DrawString(messageFont, "Instructions:", new Vector2(345, 380), Color.Black);
+                _spriteBatch.DrawString(messageFont, "Move the Paddle with A & D, you only have three lives.", new Vector2(100, 420), Color.Black);
             }
             else if (screenState == Screen.Game)
             {
